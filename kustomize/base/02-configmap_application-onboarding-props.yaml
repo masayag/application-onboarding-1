@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  application.properties: "quarkus.profile = dev\nquarkus.http.host=0.0.0.0\n# This
+    is to enable debugging of HTTP request \nquarkus.log.category.\\\"org.apache.http\\\".level=INFO"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    app: application-onboarding
+    sonataflow.org/workflow-app: application-onboarding
+  name: application-onboarding-props

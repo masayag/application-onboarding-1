@@ -1,0 +1,47 @@
+apiVersion: v1
+data:
+  application-onboarding-input-schema.json: |-
+    {
+      "$id": "classpath:/schemas/application-onboarding-schema.json",
+      "title": "application-onboarding: Data Input Schema",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "application-onboarding__sub_schema__sample_data.json": {
+          "$ref": "application-onboarding__sub_schema__sample_section.json",
+          "type": "object"
+        }
+      },
+      "required": [
+        "application-onboarding__sub_schema__sample_data.json"
+      ]
+    }
+  application-onboarding__sub_schema__sample_section.json: |-
+    {
+      "$id": "classpath:/schemas/application-onboarding__sub_schema__sample_section.json",
+      "title": "application-onboarding: Sample Section",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "sampleText": {
+          "title": "A sample text",
+          "type": "string",
+          "description": "Sample text data"
+        },
+        "sampleInteger": {
+          "title": "An integer number",
+          "type": "integer",
+          "description": "Sample integer number"
+        },
+        "sampleBoolean": {
+          "title": "A sample boolean",
+          "type": "boolean",
+          "description": "Sample boolean data"
+        }
+      },
+      "required": ["sampleText"]
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: 01-application-onboarding-resources

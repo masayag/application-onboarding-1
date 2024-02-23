@@ -1,0 +1,18 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  name: m2k
+  annotations:
+    sonataflow.org/profile: prod
+  labels:
+    backstage.io/kubernetes-id: application-onboarding
+spec:
+  podTemplate:
+    container:
+      image: serverless-workflow-application-onboarding
+      envFrom:
+      - configMapRef:
+          name: application-onboarding-config
+      - secretRef:
+          name: application-onboarding-secret
+      resources: {}

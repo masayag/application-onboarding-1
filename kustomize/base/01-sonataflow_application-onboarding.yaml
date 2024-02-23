@@ -1,0 +1,52 @@
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  annotations:
+    sonataflow.org/description: A workflow for onboarding applications to OCP cluster
+    sonataflow.org/expressionLang: jq
+    sonataflow.org/profile: dev
+    sonataflow.org/version: 1.0.0-SNAPSHOT
+  creationTimestamp: null
+  labels:
+    app: application-onboarding
+    sonataflow.org/workflow-app: application-onboarding
+  name: application-onboarding
+spec:
+  flow:
+    annotations:
+    - workflow-type/infrastructure
+    dataInputSchema:
+      failOnValidationErrors: true
+      schema: schemas/application-onboarding-input-schema.json
+    functions:
+    - name: logInfo
+      operation: sysout:INFO
+      type: custom
+    start:
+      stateName: StartState
+    states:
+    - actionMode: sequential
+      actions:
+      - actionDataFilter:
+          useResults: true
+        functionRef:
+          arguments:
+            message: '"You entered " + .someText'
+          invoke: sync
+          refName: logInfo
+        name: logInput
+      end:
+        terminate: true
+      name: StartState
+      type: operation
+  podTemplate:
+    container:
+      resources: {}
+  resources:
+    configMaps:
+    - configMap:
+        name: 01-application-onboarding-resources
+      workflowPath: specs
+status:
+  address: {}
+  lastTimeRecoverAttempt: null
